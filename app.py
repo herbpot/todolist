@@ -1,3 +1,4 @@
+import asyncio
 import os
 from time import *
 import datetime
@@ -59,8 +60,8 @@ def addnewtodo(todo):
 def donetodo(num : int):
     i = todolist[keys[num-1]]
     i[1] = 'yes'
-    res = int(datetime.timedelta(seconds=(time() - float(i[2]))))
-    i[2] = str(res)
+    res = datetime.timedelta(seconds=(time() - float(i[2])))
+    i[2] = str(res).split('.')[0]
     printtodo()
 
 def load():
@@ -107,8 +108,8 @@ def main():
     load()
     b1.bind('<Button-1>', btn_add)
     b2.bind('<Button-1>',btn_done)
-    b3.bind('<Button-1>', btn_remove)   
-    
+    b3.bind('<Button-1>', btn_remove)
     root.mainloop()
+    root.attributes("-topmost", True)
             
 main()
